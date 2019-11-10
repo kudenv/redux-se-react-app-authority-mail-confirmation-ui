@@ -63,19 +63,13 @@ export const loginSuccess = (state = INITIAL_STATE, action) => {
     };
 };
 
-export const loginFailure = (state = INITIAL_STATE, action) => {
-    const {loginSuccess: {data}} = action;
+export const loginFailure = (state = INITIAL_STATE, action) => {  
     return {
         ...state,
         showSpinner: true,
         loggedIn: false,  
-        error: action.signupError,
-        user: {
-            singUp: true,
-            loggedIn: false,
-            id: null,
-            verification: data.verification
-        }
+        error: action.loginFailure,
+        
     };
 };
 
@@ -83,6 +77,9 @@ export const HANDLERS = {
     [Types.SIGNUP_REQUEST]: signupRequest,
     [Types.SIGNUP_SUCCESS]: signupSuccess,
     [Types.SIGNUP_FAILURE]: signupFailure,
+    [Types.LOGIN_REQUEST]: loginRequest,
+    [Types.LOGIN_SUCCESS]: loginSuccess,
+    [Types.LOGIN_FAILURE]: loginFailure,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS)

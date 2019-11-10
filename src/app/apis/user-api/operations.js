@@ -1,6 +1,5 @@
 import {Creators} from "./actions";
 import LoginService from '../../services/userServices';
-import { SubmissionError } from 'redux-form';
 
 const verifyRequest = Creators.verifyRequest;
 const verifySuccess = Creators.verifySuccess;
@@ -15,13 +14,13 @@ const verifyOperation = payloadData => {
             const res = await LoginService.register(payloadData);
             if (res.error) {
                 dispatch(verifyFailure(res));
-                throw new SubmissionError({ email: 'User does not exist', _error: 'Login failed!' })
+                
             } else {
                 dispatch(verifySuccess(res));                
             }           
         } catch (err){
             dispatch(verifyFailure(err));            
-            throw new SubmissionError({ email: 'User does not exist', _error: 'Login failed!' })            
+        
         }        
     };
 };

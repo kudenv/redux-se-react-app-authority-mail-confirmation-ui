@@ -3,7 +3,7 @@ import axios from 'axios';
 const request = () => {
     const customRequest = axios.create({
         baseURL: 'http://localhost:8000',
-        timeout: 15000,
+        timeout: 30000,
         headers: {
             'Content-Type': 'application/json'
         }
@@ -29,16 +29,25 @@ const request = () => {
         if (response && response.data) {
             errorData = {
                 error: true,
-                errorStatus: response.status,
-                errorStatusText: response.statusText,
-                errorMessage: response.data.msg,
-                errorName: response.data.name,
+                status: response.status,
+                statusText: response.statusText,
+                message: response.data.msg,
+                code: response.data.errCode
             }
         }
         if (error && error.isAxiosError && error.message) {
             errorData = {
                 error: true,
                 message: error.message 
+            }
+        }
+        if (response && response.data && error && error.message) {
+            errorData = {
+                error: true,
+                status: response.status,
+                statusText: response.statusText,
+                message: response.data.msg,
+                code: response.data.errCode
             }
         }
         return errorData;

@@ -1,8 +1,7 @@
 import Request from './utils/baseService';
 
-const authlogin = async (payload) => {   
-    return await Request().post('/auth/login', payload);
-    // need to put it on inteceptor axios service
+async function authlogin(payload) {   
+    return await Request().post('/auth/login', payload);   
     // if (user && user.token) {
     //     localStorage.setItem('user', JSON.stringify(user));
     // }

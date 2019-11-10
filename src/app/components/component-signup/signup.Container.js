@@ -18,11 +18,8 @@ import { isInvalid } from 'redux-form';
 //       })
 // }
 
-const mapStateToProps = state => {
-    const {auth: {error}} = state;
-    return {
-        appExeptions: error,  
-        fromInvalid: isInvalid('signupForm')(state),              
+const mapStateToProps = state => {    
+    return {                              
         user: state.auth.user,
     };
 };

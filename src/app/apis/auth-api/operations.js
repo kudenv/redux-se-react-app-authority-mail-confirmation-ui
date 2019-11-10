@@ -19,7 +19,7 @@ const signupOperation = signupPayload => {
             const res = await LoginService.register(signupPayload);
             if (res.error) {
                 dispatch(signupFailure(res));
-               // throw new SubmissionError({ email: 'User does not exist', _error: 'Login failed!' })
+                // throw new SubmissionError({ email: res.message, _error: 'Login failed!' })
             } else {
                 dispatch(signupSuccess(res));                
             }           
@@ -36,15 +36,15 @@ const loginOperation = signupPayload => {
         // flag in the store, so that the UI can show a loading icon.
         dispatch(loginRequest());    
         try {
-            const res = await LoginService.authlogin(signupPayload);
+            const res = await LoginService.login(signupPayload);
             if (res.error) {
-                dispatch(loginSuccess(res));
+                dispatch(loginFailure(res));
             } else {
-                dispatch(signupSuccess(res));
+                dispatch(loginSuccess(res));
             }           
         } catch (err){
             dispatch(loginFailure(err));
-            new Error('Login fail');
+           // new Error('Login fail');
         }        
     };
 };
